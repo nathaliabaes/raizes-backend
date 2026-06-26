@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Perfil {
+  ADMIN
+  GERENTE
+  CLIENTE
+  COZINHA
+  ATENDENTE
+}
+
+enum CanalPedido {
+  APP
+  TOTEM
+  BALCAO
+  PICKUP
+  WEB
+}
+
+enum StatusPedido {
+  AGUARDANDO_PAGAMENTO
+  PAGO
+  EM_PREPARO
+  PRONTO
+  ENTREGUE
+  CANCELADO
+}
+
+enum StatusPagamento {
+  APROVADO
+  RECUSADO
+  PENDENTE
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  perfil    Perfil   @default(CLIENTE)
+  ativo     Boolean  @default(true)
+  criadoEm DateTime @default(now())
+
+  pedidos    Pedido[]
+  fidelidade Fidelidade?
+  logs       LogAuditoria[]
+
+  @@map("usuarios")
+}
+
+model Unidade {
+  id       Int    @id @default(autoincrement())
+  nome     String
+  endereco String
+  cidade   String
+  ativo    Boolean @default(true)
+
+  estoque  Estoque[]
+  pedidos  Pedido[]
+
+  @@map("unidades")
+}
+
+model Produto {
+  id        Int     @id @default(autoincrement())
+  nome      String
+  descricao String?
+  preco     Decimal @db.Decimal(10, 2)
+  ativo     Boolean @default(true)
+
+  estoque     Estoque[]
+  pedidoItens PedidoItem[]
+
+  @@map("produtos")
+}
+
+model Estoque {
+  id         Int     @id @default(autoincrement())
+  unidadeId  Int
+  produtoId  Int
+  quantidade Int     @default(0)
+
+  unidade Unidade @relation(fields: [unidadeId], references: [id])
+  produto Produto @relation(fields: [produtoId], references: [id])
+
+  @@unique([unidadeId, produtoId])
+  @@map("estoque")
+}
+
+model Pedido {
+  id          Int          @id @default(autoincrement())
+  usuarioId   Int
+  unidadeId   Int
+  canalPedido CanalPedido @map("canal")
+  status      StatusPedido @default(AGUARDANDO_PAGAMENTO)
+  total       Decimal      @db.Decimal(10, 2)
+  criadoEm   DateTime     @default(now())
+
+  usuario    Usuario      @relation(fields: [usuarioId], references: [id])
+  unidade    Unidade      @relation(fields: [unidadeId], references: [id])
+  itens      PedidoItem[]
+  pagamento  Pagamento?
+
+  @@map("pedidos")
+}
+
+model PedidoItem {
+  id         Int     @id @default(autoincrement())
+  pedidoId   Int
+  produtoId  Int
+  quantidade Int
+  precoUnit  Decimal @db.Decimal(10, 2)
+
+  pedido  Pedido  @relation(fields: [pedidoId], references: [id])
+  produto Produto @relation(fields: [produtoId], references: [id])
+
+  @@map("pedido_itens")
+}
+
+model Pagamento {
+  id        Int             @id @default(autoincrement())
+  pedidoId  Int             @unique
+  status    StatusPagamento @default(PENDENTE)
+  metodo    String
+  valor     Decimal         @db.Decimal(10, 2)
+  criadoEm DateTime        @default(now())
+
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
+
+  @@map("pagamentos")
+}
+
+model Fidelidade {
+  id        Int  @id @default(autoincrement())
+  usuarioId Int  @unique
+  pontos    Int  @default(0)
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+
+  @@map("fidelidade")
+}
+
+model LogAuditoria {
+  id        Int      @id @default(autoincrement())
+  usuarioId Int?
+  acao      String
+  detalhes  String?
+  criadoEm DateTime @default(now())
+
+  usuario Usuario? @relation(fields: [usuarioId], references: [id])
+
+  @@map("logs_auditoria")
+}
