@@ -27,6 +27,7 @@ const unidadesRoutes = require('./routes/unidadesRoutes');
 const pedidosRoutes = require('./routes/pedidosRoutes');
 const pagamentosRoutes = require('./routes/pagamentosRoutes');
 const fidelidadeRoutes = require('./routes/fidelidadeRoutes');
+const estoqueRoutes = require('./routes/estoqueRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 
 app.use('/docs/swagger.json', (req, res) => res.json(swaggerSpec));
@@ -62,6 +63,7 @@ app.use('/unidades', unidadesRoutes);
 app.use('/pedidos', pedidosRoutes);
 app.use('/pagamentos', pagamentosRoutes);
 app.use('/fidelidade', fidelidadeRoutes);
+app.use('/estoque', estoqueRoutes);
 
 app.use(errorHandler);
 

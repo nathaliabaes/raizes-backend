@@ -1,0 +1,386 @@
+{
+  "info": {
+    "name": "Raízes do Nordeste — API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Cadastrar usuário",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/auth/register", "host": ["localhost"], "port": "3000", "path": ["auth", "register"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria Silva\",\n  \"email\": \"maria@email.com\",\n  \"senha\": \"senha123\",\n  \"perfil\": \"CLIENTE\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/auth/login", "host": ["localhost"], "port": "3000", "path": ["auth", "login"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@raizes.com\",\n  \"senha\": \"Admin123!\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuários",
+      "item": [
+        {
+          "name": "Listar usuários",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:3000/usuarios", "host": ["localhost"], "port": "3000", "path": ["usuarios"] }
+          }
+        },
+        {
+          "name": "Buscar usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:3000/usuarios/1", "host": ["localhost"], "port": "3000", "path": ["usuarios", "1"] }
+          }
+        },
+        {
+          "name": "Atualizar usuário",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/usuarios/2", "host": ["localhost"], "port": "3000", "path": ["usuarios", "2"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"perfil\": \"GERENTE\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Produtos",
+      "item": [
+        {
+          "name": "Listar produtos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/produtos", "host": ["localhost"], "port": "3000", "path": ["produtos"] }
+          }
+        },
+        {
+          "name": "Buscar produto por ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/produtos/1", "host": ["localhost"], "port": "3000", "path": ["produtos", "1"] }
+          }
+        },
+        {
+          "name": "Criar produto",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/produtos", "host": ["localhost"], "port": "3000", "path": ["produtos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Tapioca Recheada\",\n  \"descricao\": \"Tapioca com queijo coalho e carne seca desfiada\",\n  \"preco\": 18.50\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar produto",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/produtos/1", "host": ["localhost"], "port": "3000", "path": ["produtos", "1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"preco\": 32.00\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unidades",
+      "item": [
+        {
+          "name": "Listar unidades",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/unidades", "host": ["localhost"], "port": "3000", "path": ["unidades"] }
+          }
+        },
+        {
+          "name": "Buscar unidade por ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/unidades/1", "host": ["localhost"], "port": "3000", "path": ["unidades", "1"] }
+          }
+        },
+        {
+          "name": "Criar unidade",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/unidades", "host": ["localhost"], "port": "3000", "path": ["unidades"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Unidade Fortaleza Norte\",\n  \"endereco\": \"Av. Bezerra de Menezes, 800\",\n  \"cidade\": \"Fortaleza\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar unidade",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/unidades/1", "host": ["localhost"], "port": "3000", "path": ["unidades", "1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Unidade Centro\",\n  \"endereco\": \"Rua A, 100\",\n  \"cidade\": \"Maranhão\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pedidos",
+      "item": [
+        {
+          "name": "Criar pedido",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/pedidos", "host": ["localhost"], "port": "3000", "path": ["pedidos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": 1,\n  \"unidadeId\": 1,\n  \"canalPedido\": \"APP\",\n  \"itens\": [\n    {\n      \"produtoId\": 1,\n      \"quantidade\": 2\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar pedidos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:3000/pedidos", "host": ["localhost"], "port": "3000", "path": ["pedidos"] }
+          }
+        },
+        {
+          "name": "Listar pedidos com filtro",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/pedidos?canalPedido=APP&status=AGUARDANDO_PAGAMENTO",
+              "host": ["localhost"], "port": "3000", "path": ["pedidos"],
+              "query": [
+                { "key": "canalPedido", "value": "APP" },
+                { "key": "status", "value": "AGUARDANDO_PAGAMENTO" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar pedido por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:3000/pedidos/1", "host": ["localhost"], "port": "3000", "path": ["pedidos", "1"] }
+          }
+        },
+        {
+          "name": "Atualizar status do pedido",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/pedidos/1/status", "host": ["localhost"], "port": "3000", "path": ["pedidos", "1", "status"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"EM_PREPARO\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pagamentos",
+      "item": [
+        {
+          "name": "Pagamento aprovado",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/pagamentos", "host": ["localhost"], "port": "3000", "path": ["pagamentos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pedidoId\": 1,\n  \"metodo\": \"PIX\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Pagamento recusado (simularRecusa)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/pagamentos", "host": ["localhost"], "port": "3000", "path": ["pagamentos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pedidoId\": 2,\n  \"metodo\": \"CARTAO\",\n  \"simularRecusa\": true\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Erros",
+      "item": [
+        {
+          "name": "Acesso sem token (401)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/usuarios", "host": ["localhost"], "port": "3000", "path": ["usuarios"] }
+          }
+        },
+        {
+          "name": "Perfil sem permissão (403)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_cliente}}" }],
+            "url": { "raw": "http://localhost:3000/usuarios", "host": ["localhost"], "port": "3000", "path": ["usuarios"] }
+          }
+        },
+        {
+          "name": "Produto inexistente (404)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/produtos/9999", "host": ["localhost"], "port": "3000", "path": ["produtos", "9999"] }
+          }
+        },
+        {
+          "name": "Email duplicado (409)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/auth/register", "host": ["localhost"], "port": "3000", "path": ["auth", "register"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Admin\",\n  \"email\": \"admin@raizes.com\",\n  \"senha\": \"Admin123!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Dados inválidos (422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/pedidos", "host": ["localhost"], "port": "3000", "path": ["pedidos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": 1\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Estoque",
+      "item": [
+        {
+          "name": "Listar estoque por unidade",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/estoque?unidadeId=1",
+              "host": ["localhost"], "port": "3000", "path": ["estoque"],
+              "query": [{ "key": "unidadeId", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Atualizar estoque",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/estoque", "host": ["localhost"], "port": "3000", "path": ["estoque"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unidadeId\": 1,\n  \"produtoId\": 1,\n  \"quantidade\": 30\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fidelidade",
+      "item": [
+        {
+          "name": "Consultar pontos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:3000/fidelidade", "host": ["localhost"], "port": "3000", "path": ["fidelidade"] }
+          }
+        },
+        {
+          "name": "Adicionar pontos",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "http://localhost:3000/fidelidade/pontos", "host": ["localhost"], "port": "3000", "path": ["fidelidade", "pontos"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": 1,\n  \"pontos\": 100\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
