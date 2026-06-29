@@ -2,12 +2,15 @@
 
 API de gestão da rede de lanchonetes Raízes do Nordeste.
 
+**Repositório:** https://github.com/nathaliabaes/raizes-backend
+
 ---
 
 ## Requisitos
 
 - Node.js 18 ou superior
 - PostgreSQL (ou conta no Supabase)
+- Principais dependências: Express 5, Prisma 6, JWT, bcryptjs
 
 ---
 
@@ -27,7 +30,10 @@ npx prisma migrate deploy
 # 4. Gerar o Prisma Client
 npx prisma generate
 
-# 5. Subir o servidor
+# 5. Popular o banco com dados iniciais (seed)
+npx prisma db seed
+
+# 6. Subir o servidor
 npm run dev
 ```
 
@@ -103,4 +109,4 @@ A coleção completa está no arquivo `raizes-collection.postman_collection.json
 
 ---
 
-## Declaração de uso de Inteligência Artificial
+
