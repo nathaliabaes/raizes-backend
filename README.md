@@ -62,7 +62,6 @@ Acesse `http://localhost:3000/docs` com o servidor rodando.
 | Perfil | Permissões |
 |---|---|
 | `ADMIN` | Acesso total |
-| `GERENTE` | Produtos, pedidos, fidelidade |
 | `COZINHA` | Atualização de status dos pedidos |
 | `ATENDENTE` | Acesso operacional |
 | `CLIENTE` | Próprios pedidos e fidelidade |
